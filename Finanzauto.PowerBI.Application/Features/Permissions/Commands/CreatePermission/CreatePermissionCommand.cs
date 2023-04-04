@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.CreatePermission
@@ -12,8 +13,12 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.CreatePer
     {
         public int usrId { get; set; }
         public int chilId { get; set; }
-        public bool state { get; set; }
-        public DateTime createDate { get; set; }
+
+        [JsonIgnore]
+        public bool state { get; set; } = true;
+        [JsonIgnore]
+        public DateTime createDate { get; set; } = DateTime.Now;
+
         public int createUser { get; set; }
     }
 }

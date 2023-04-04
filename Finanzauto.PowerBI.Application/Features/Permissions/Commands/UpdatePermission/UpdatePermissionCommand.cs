@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.UpdatePermission
@@ -14,7 +15,10 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.UpdatePer
         public int usrId { get; set; }
         public int chilId { get; set; }
         public bool state { get; set; }
-        public DateTime modifyDate { get; set; }
+
+        [JsonIgnore]
+        public DateTime modifyDate { get; set; } = DateTime.Now;
+
         public int modifyUser { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Finanzauto.PowerBI.Application.Features.Logins.Commands.CreateLogin
@@ -14,8 +15,12 @@ namespace Finanzauto.PowerBI.Application.Features.Logins.Commands.CreateLogin
         public int lgnConnectionTimes { get; set; }
         public DateTime lgnLastConnection { get; set; }
         public int usrId { get; set; }
-        public bool state { get; set; }
-        public DateTime createDate { get; set; }
+
+        [JsonIgnore]
+        public bool state { get; set; } = true;
+        [JsonIgnore]
+        public DateTime createDate { get; set; } = DateTime.Now;
+        
         public int createUser { get; set; }
     }
 }
