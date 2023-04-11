@@ -13,8 +13,9 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    [Authorize]
-
+#if !DEBUG
+        [Authorize]
+#endif  
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -24,9 +25,9 @@ namespace Finanzauto.PowerBI.API.Controllers
             _mediator = mediator;
         }
         [HttpGet("GetUser")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser(string? usrDomainName)
+        public async Task<ActionResult<IEnumerable<User>>> GetUser(string? usrDomainName, int? usrId)
         {
-            var query = await _mediator.Send(new ListUserQuery(usrDomainName));
+            var query = await _mediator.Send(new ListUserQuery(usrDomainName, usrId));
             return Ok(query);
         }
 

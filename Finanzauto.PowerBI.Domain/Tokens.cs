@@ -12,12 +12,10 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class Tokens : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int tknId { get; set; }
 
         public int usrId { get; set; }
         [ForeignKey("usrId")]
-        [JsonIgnore]
         public User User { get; set; }
 
         public string tknToken { get; set; }

@@ -32,31 +32,26 @@ namespace Finanzauto.PowerBI.Application.Features.Users.Queries.ListUser
 
         public async Task<ResponseListUserVm> Handle(ListUserQuery request, CancellationToken cancellationToken)
         {
-            if (request.UsrDomainName != null)
+            try
             {
-                var user = await _unitOfWork.Repository<User>().GetAsync(x => x.usrDomainName == request.UsrDomainName);
-                var userVm = _mapper.Map<List<ListUserVm>>(user);
-
+                var user = await _unitOfWork.Repository<User>().GetAsync(x => x.usrDomainName == request.UsrDomainName || x.usrId == request.usrId);
+                if (user.Count == 0)
+                {
+                    user = await _unitOfWork.Repository<User>().GetAllAsync();
+                }
                 ResponseListUserVm response = new ResponseListUserVm()
                 {
-                    result = userVm
+                    result = _mapper.Map<List<ListUserVm>>(user)
                 };
                 return response;
-
             }
-            else
+            catch (Exception ex)
             {
-                var rol = await _unitOfWork.Repository<User>().GetAllAsync();
-                var rolVm = _mapper.Map<List<ListUserVm>>(rol);
-
-                ResponseListUserVm response = new ResponseListUserVm()
+                return new ResponseListUserVm()
                 {
-                    result = rolVm
+                    result = null
                 };
-                return response;
-
-            }
-            return ResponseListUserVm;
+            }                
         }
     }
 }

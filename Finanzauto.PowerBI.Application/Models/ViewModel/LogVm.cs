@@ -10,7 +10,7 @@ namespace Finanzauto.PowerBI.Application.Models.ViewModel
     {
         public int logId { get; set; }
         public int usrId { get; set; }
-        public int chiIld { get; set; }
+        public int chId { get; set; }
         public int logPrintTimes { get; set; }
         public DateTime logLastConnection { get; set; }
 

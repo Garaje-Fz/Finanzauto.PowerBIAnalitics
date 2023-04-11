@@ -15,7 +15,9 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    //[Authorize]
+#if !DEBUG
+        [Authorize]
+#endif
 
     public class ChildReportController : ControllerBase
     {
@@ -26,7 +28,7 @@ namespace Finanzauto.PowerBI.API.Controllers
             _mediator = mediator;
         }
         [HttpGet("GetChildReport")]
-        public async Task<ActionResult<IEnumerable<ChildReport>>> GetUser(int? chId)
+        public async Task<ActionResult<IEnumerable<ChildReportVm>>> GetUser(int? chId)
         {
             var query = await _mediator.Send(new ListChildReportQuery(chId));
             return Ok(query);

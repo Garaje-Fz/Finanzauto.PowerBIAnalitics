@@ -15,7 +15,9 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    [Authorize]
+#if !DEBUG
+        [Authorize]
+#endif
     public class LogController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -11,11 +11,11 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class ParentReport : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int parId { get; set; }
         public string parIcon { get; set; }
         public string parDescription { get; set; }
-        public virtual ICollection<ChildReport> ChildReports { get; set; }
+
+        public List<ChildReport> GetChildReports { get; set; }
 
     }
 }

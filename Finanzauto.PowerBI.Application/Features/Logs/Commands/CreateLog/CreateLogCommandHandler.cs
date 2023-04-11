@@ -40,7 +40,6 @@ namespace Finanzauto.PowerBI.Application.Features.Logs.Commands.CreateLog
                 ResponseLogVm responseUser = new ResponseLogVm()
                 {
                     result = EntityResponse
-
                 };
 
                 _logger.LogInformation($"El log fue creado con el id {EntityAdd.usrId}");

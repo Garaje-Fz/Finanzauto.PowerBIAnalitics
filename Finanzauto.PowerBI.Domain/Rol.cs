@@ -11,8 +11,9 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class Rol : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int rolId { get; set; }
         public string rolDescription { get; set; }
+
+        public List<User> GetUsers { get; set; }
     }
 }

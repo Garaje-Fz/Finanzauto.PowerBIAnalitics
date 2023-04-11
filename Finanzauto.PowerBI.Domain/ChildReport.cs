@@ -11,14 +11,15 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class ChildReport : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int chId { get; set; }
         public string chiDescription { get; set; }
         public string chiUrl { get; set; }
+
         public int parId { get; set; }
         [ForeignKey("parId")]
-        public virtual ParentReport ParentReport { get; set; }
-        public virtual Permission Permission { get; set; }
+        public ParentReport ParentReport { get; set; }
 
+        public List<Log> GetLogs { get; set; }
+        public List<Permission> GetPermissions { get; set; }
     }
 }

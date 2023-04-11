@@ -6,15 +6,6 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("PolicyCors", builder =>
-    builder.AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    );
-});
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -41,12 +32,7 @@ builder.Services.AddAuthServices(builder.Configuration);
 var app = builder.Build();
 
 //app.UseCors("PolicyCors");
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .AllowAnyOrigin()
-    //.WithOrigins("https://www.finanzauto.com.co")
-    );
+app.UseCors("PolicyCors");
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

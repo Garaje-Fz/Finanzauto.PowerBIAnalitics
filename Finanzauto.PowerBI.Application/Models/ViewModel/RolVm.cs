@@ -10,5 +10,6 @@ namespace Finanzauto.PowerBI.Application.Models.ViewModel
     {
         public int rolId {get; set; }
         public string rolDescription { get; set; }
+        public bool state { get; set; }
     }
 }

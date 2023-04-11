@@ -10,10 +10,12 @@ namespace Finanzauto.PowerBI.Application.Features.Users.Queries.ListUser
 {
     public class ListUserQuery : IRequest<ResponseListUserVm>
     {
-        public ListUserQuery(string? usrDomainName)
+        public ListUserQuery(string? usrDomainName, int? usrId)
         {
             UsrDomainName = usrDomainName;
+            this.usrId = usrId;
         }
+        public int? usrId { get; set; }
         public string? UsrDomainName { get; set; }
     }
 }

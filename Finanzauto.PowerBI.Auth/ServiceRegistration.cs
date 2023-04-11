@@ -20,9 +20,7 @@ namespace Finanzauto.PowerBI.Auth
         {
             services.AddTransient<IClientService, ClientService>();
             services.AddScoped<ICacheService, CacheService>();
-
             services.Configure<ApikeyClientsSettings>(configuration.GetSection("ApikeyClientsSettings"));
-
             services.AddScoped<ApiKeyAuthenticationHandler>();
 
             var tokenValidationParameters = new TokenValidationParameters
@@ -35,6 +33,16 @@ namespace Finanzauto.PowerBI.Auth
                 RequireExpirationTime = false,
                 ClockSkew = TimeSpan.Zero
             };
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("PolicyCors", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
             services.AddAuthentication(options =>
             {

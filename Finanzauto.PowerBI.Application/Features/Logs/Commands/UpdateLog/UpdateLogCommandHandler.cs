@@ -28,11 +28,10 @@ namespace Finanzauto.PowerBI.Application.Features.Logs.Commands.UpdateLog
         }
         public async Task<ResponseLogVm> Handle(UpdateLogCommand request, CancellationToken cancellationToken)
         {
-            var updateLog = await _unitOfWork.Repository<Log>().GetFirstOrDefaultAsync(x => x.usrId == request.usrId && x.state == true);
+            var updateLog = await _unitOfWork.Repository<Log>().GetFirstOrDefaultAsync(x => x.logId == request.logId && x.state == true);
 
             if (updateLog != null)
             {
-                updateLog.logId = request.logId;
                 updateLog.usrId = request.usrId;
                 updateLog.chId = request.chiIld;
                 updateLog.logLastConnection = request.logLastConnection;

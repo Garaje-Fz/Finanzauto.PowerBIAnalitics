@@ -12,16 +12,18 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class User : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int usrId { get; set; }
         public string usrName { get; set; }
         public string usrLastName { get; set; }
         public string usrEmail { get; set; }
         public string usrDomainName { get; set; }
+        
         public int rolId { get; set; }
         [ForeignKey("rolId")]
-        public virtual Rol Rol { get; set; }
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public Rol Rol { get; set; }
 
+        public List<Permission> GetPermissions { get; set; }
+        public List<Log> GetLogs { get; set; }
+        public List<Login> GetLogins { get; set; }
     }
 }

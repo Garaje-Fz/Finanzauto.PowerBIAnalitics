@@ -21,128 +21,123 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries<Entity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        entry.Entity.createDate = DateTime.Now;
-                        entry.Entity.createUser = 1;
-                        break;
-                    case EntityState.Modified:
-                        entry.Entity.modifyDate = DateTime.Now;
-                        entry.Entity.modifyUser = 1;
-                        break;
-                }
-            }
-
             return base.SaveChangesAsync(cancellationToken);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Registros creados por defecto en la base de datos
+
             List<Rol> RolInit = new List<Rol>();
+
             RolInit.Add(new Rol
             {
                 rolId = 1,
-                rolDescription = "Estratégico",
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-            });
-
-            RolInit.Add(new Rol
-            {
-                rolId = 2,
-                rolDescription = "Táctico",
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-            });
-
-            RolInit.Add(new Rol
-            {
-                rolId = 3,
-                rolDescription = "Operativo",
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-            });
-
-            RolInit.Add(new Rol
-            {
-                rolId = 4,
                 rolDescription = "Administrador",
                 state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
+                createUser = 1,
             });
-
+            RolInit.Add(new Rol
+            {
+                rolId = 2,
+                rolDescription = "Operativo",
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
+            RolInit.Add(new Rol
+            {
+                rolId = 3,
+                rolDescription = "Estrategico",
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
+            RolInit.Add(new Rol
+            {
+                rolId = 4,
+                rolDescription = "Supervisor",
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
             RolInit.Add(new Rol
             {
                 rolId = 5,
                 rolDescription = "Default",
                 state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
+                createUser = 1,
             });
 
             List<User> UserInit = new List<User>();
-            UserInit.Add(new User
-            {
-                usrId = 100,
-                rolId = 1,
-                usrLastName = "Gonzales",
-                usrDomainName = "milton.gonzales",
-                usrEmail = "milton.gonzales@finanzauto.com",
-                usrName = "Milton",
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
 
-            });
             UserInit.Add(new User
             {
-                usrId = 101,
-                rolId = 1,
-                usrLastName = "Cruz",
-                usrDomainName = "hector.cruz",
-                usrEmail = "hector.cruz@finanzauto.com",
-                usrName = "Hector",
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            UserInit.Add(new User
-            {
-                usrId = 102,
-                rolId = 1,
+                usrId = 1,
+                usrName = "Efrain",
                 usrLastName = "Guzman",
-                usrDomainName = "enrique.guzman",
-                usrEmail = "enrique.guzman@finanzauto.com",
-                usrName = "Enrique",
+                usrEmail = "efrain.guzman@finanzauto.com.co",
+                usrDomainName = "efrain.guzman",
+                rolId = 1,
                 state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
-
+                createUser = 1,
             });
+            UserInit.Add(new User
+            {
+                usrId = 2,
+                usrName = "Hector",
+                usrLastName = "Cruz",
+                usrEmail = "hector.cruz@finanzauto.com.co",
+                usrDomainName = "hector.cruz",
+                rolId = 1,
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
+            UserInit.Add(new User
+            {
+                usrId = 3,
+                usrName = "Cristian",
+                usrLastName = "Vargas",
+                usrEmail = "cristian.vargas@finanzauto.com.co",
+                usrDomainName = "cristian.vargas",
+                rolId = 1,
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
+            UserInit.Add(new User
+            {
+                usrId = 4,
+                usrName = "Julian",
+                usrLastName = "Bojaca",
+                usrEmail = "julian.bojaca@finanzauto.com.co",
+                usrDomainName = "julian.bojaca",
+                rolId = 1,
+                state = true,
+                createDate = DateTime.Now,
+                createUser = 1,
+            });
+
             List<ParentReport> ParentReportInit = new List<ParentReport>();
+
             ParentReportInit.Add(new ParentReport
             {
                 parId = 1,
+                parIcon = "strategic",
                 parDescription = "Reportes Estratégicos",
-                parIcon = "icon_estrategic.png",
                 state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
+                createUser = 4,
 
             });
             ParentReportInit.Add(new ParentReport
             {
                 parId = 2,
+                parIcon = "tactical",
                 parDescription = "Reportes Tácticos",
-                parIcon = "icon_tactic.png",
                 state = true,
                 createDate = DateTime.Now,
                 createUser = 2140,
@@ -151,8 +146,8 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
             ParentReportInit.Add(new ParentReport
             {
                 parId = 3,
+                parIcon = "operative",
                 parDescription = "Reportes Operacionales",
-                parIcon = "icon_operational.png",
                 state = true,
                 createDate = DateTime.Now,
                 createUser = 2140,
@@ -161,13 +156,14 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
             ParentReportInit.Add(new ParentReport
             {
                 parId = 4,
-                parDescription = "Administrador",
-                parIcon = "icon_administration.png",
+                parIcon = "administrador",
+                parDescription = "Reportes Administrador",
                 state = true,
                 createDate = DateTime.Now,
                 createUser = 2140,
 
             });
+
             List<ChildReport> ChildReportInit = new List<ChildReport>();
             ChildReportInit.Add(new ChildReport
             {
@@ -213,7 +209,6 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
                 createUser = 2140,
 
             }); 
-
             ChildReportInit.Add(new ChildReport
             {
                 chId = 5,
@@ -230,7 +225,7 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
                 chId = 6,
                 parId = 2,
                 chiDescription = "Reporte Táctico # 3",
-                chiUrl = "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ13",
+                chiUrl = "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ14",
                 state = true,
                 createDate = DateTime.Now,
                 createUser = 2140,
@@ -258,7 +253,6 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
                 createUser = 2140,
 
             });
-
             ChildReportInit.Add(new ChildReport
             {
                 chId = 9,
@@ -270,7 +264,6 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
                 createUser = 2140,
 
             });
-
             ChildReportInit.Add(new ChildReport
             {
                 chId = 10,
@@ -286,7 +279,7 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
             {
                 chId = 11,
                 parId = 4,
-                chiDescription = "Gestión de Permisos",
+                chiDescription = "Gestión de Reportes",
                 chiUrl = "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ19\r\n",
                 state = true,
                 createDate = DateTime.Now,
@@ -294,122 +287,71 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
 
             });
 
-            List<Permission> PermissionInit = new List<Permission>();
-            PermissionInit.Add(new Permission
-            {
-                perId =1,
-                usrId = 100,
-                chilId = 7,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            PermissionInit.Add(new Permission
-            {
-                perId = 2,
-                usrId = 100,
-                chilId = 8,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            PermissionInit.Add(new Permission
-            {
-                perId = 3,
-                usrId = 100,
-                chilId = 9,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            PermissionInit.Add(new Permission
-            {
-                perId = 4,
-                usrId = 101,
-                chilId = 11,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
             List<Login> LoginInit = new List<Login>();
+
             LoginInit.Add(new Login
             {
                 lgnId = 1,
-                usrId = 100,
-                lgnIp = "123.12.36.98",
-                state = true,
+                lgnIp = "123.12.36.52",
                 lgnConnectionTimes = 10,
                 lgnLastConnection = DateTime.Now,
+                usrId = 1,
+                state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
-
+                createUser = 4,
             });
             LoginInit.Add(new Login
             {
-                lgnId = 3,
-                usrId = 101,
-                lgnIp = "123.12.36.98",
+                lgnId = 2,
+                lgnIp = "123.12.36.2",
                 lgnConnectionTimes = 10,
                 lgnLastConnection = DateTime.Now,
+                usrId = 1,
                 state = true,
                 createDate = DateTime.Now,
-                createUser = 2140,
-
+                createUser = 4,
             });
-            LoginInit.Add(new Login
-            {
-                lgnId = 3,
-                usrId = 102,
-                lgnIp = "123.12.36.98",
-                lgnConnectionTimes = 10,
-                lgnLastConnection = DateTime.Now,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
 
-            });
-            List<Log> LogInit = new List<Log>();
-            LogInit.Add(new Log
-            {
-                logId = 1,
-                usrId = 100,
-                chId = 2,
-                logPrintTimes = 10,
-                logLastConnection = DateTime.Now,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            LogInit.Add(new Log
-            {
-                logId = 1,
-                usrId = 101,
-                chId = 2,
-                logPrintTimes = 10,
-                logLastConnection = DateTime.Now,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
-            LogInit.Add(new Log
-            {
-                logId = 1,
-                usrId = 102,
-                chId = 2,
-                logPrintTimes = 10,
-                logLastConnection = DateTime.Now,
-                state = true,
-                createDate = DateTime.Now,
-                createUser = 2140,
-
-            });
             #endregion
+            modelBuilder.Entity<ChildReport>(child =>
+            {
+                child.ToTable("ChildReports");
+                child.HasKey(x => x.chId);
+                child.HasData(ChildReportInit);
+            });
+            modelBuilder.Entity<Log>(logs =>
+            {
+                logs.ToTable("Logs");
+                logs.HasKey(x => x.logId);
+            });
+            modelBuilder.Entity<Login>(logins =>
+            {
+                logins.ToTable("Logins");
+                logins.HasKey(x => x.lgnId);
+                logins.HasData(LoginInit);
+            });
+            modelBuilder.Entity<ParentReport>(parent =>
+            {
+                parent.ToTable("ParentReports");
+                parent.HasKey(x => x.parId);
+                parent.HasData(ParentReportInit);
+            });
+            modelBuilder.Entity<Permission>(permission =>
+            {
+                permission.ToTable("Permissions");
+                permission.HasKey(x => x.perId);
+            });
+            modelBuilder.Entity<Rol>(rol =>
+            {
+                rol.ToTable("Roles");
+                rol.HasKey(x => x.rolId);
+                rol.HasData(RolInit);
+            });
+            modelBuilder.Entity<Tokens>(tokens => 
+            {
+                tokens.ToTable("Tokens");
+                tokens.HasKey(x => x.tknId);
+            });
         }
         public DbSet<ChildReport> ChildReports { get; set; }
         public DbSet<Log> Logs { get; set; }
@@ -419,7 +361,6 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
         public DbSet<Rol> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Tokens> Tokens { get; set; }
-        public DbSet<UserPermission> UserPermissions { get; set; }
-
+        //public DbSet<UserPermission> UserPermissions { get; set; }
     }
 }

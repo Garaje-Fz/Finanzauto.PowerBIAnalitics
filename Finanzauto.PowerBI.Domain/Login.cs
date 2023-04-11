@@ -11,14 +11,13 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class Login : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int lgnId { get; set; }
         public string lgnIp { get; set; }
         public int lgnConnectionTimes { get; set; }
         public DateTime lgnLastConnection { get; set; }
+
         public int usrId { get; set; }
         [ForeignKey("usrId")]
         public User User { get; set; }
-
     }
 }

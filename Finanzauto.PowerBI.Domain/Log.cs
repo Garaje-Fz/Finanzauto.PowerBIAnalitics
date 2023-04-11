@@ -11,16 +11,16 @@ namespace Finanzauto.PowerBI.Domain
 {
     public class Log : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int logId { get; set; }
         public int logPrintTimes { get; set; }
         public DateTime logLastConnection { get; set; }
+
         public int usrId { get; set; }
         [ForeignKey("usrId")]
         public User User { get; set; }
+
         public int chId { get; set; }
         [ForeignKey("chId")]
         public ChildReport ChildReport { get; set; }
-
     }
 }

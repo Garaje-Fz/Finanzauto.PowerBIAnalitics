@@ -28,7 +28,7 @@ namespace Finanzauto.PowerBI.Application.Features.Roles.Commands.UpdateRol
         }
         public async Task<ResponseRolVm> Handle(UpdateRolCommand request, CancellationToken cancellationToken)
         {
-            var updateRol = await _unitOfWork.Repository<Rol>().GetFirstOrDefaultAsync(x => x.rolId == request.rolId && x.state == true);
+            var updateRol = await _unitOfWork.Repository<Rol>().GetFirstOrDefaultAsync(x => x.rolId == request.rolId);
 
             if (updateRol != null)
             {
