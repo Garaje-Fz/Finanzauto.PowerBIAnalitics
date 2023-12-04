@@ -13,7 +13,10 @@ namespace Finanzauto.PowerBI.Application.Features.Logins.Commands.CreateLogin
     {
         public string lgnIp { get; set; }
         public int lgnConnectionTimes { get; set; }
-        public DateTime lgnLastConnection { get; set; }
+
+        [JsonIgnore]
+        public DateTime lgnLastConnection { get; set; } = DateTime.Now;
+        
         public int usrId { get; set; }
 
         [JsonIgnore]

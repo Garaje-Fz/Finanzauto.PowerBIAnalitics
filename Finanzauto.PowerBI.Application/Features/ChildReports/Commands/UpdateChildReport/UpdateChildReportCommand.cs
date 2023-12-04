@@ -11,15 +11,11 @@ namespace Finanzauto.PowerBI.Application.Features.ChildReports.Commands.UpdateCh
 {
     public class UpdateChildReportCommand : IRequest<ResponseChildReportVm>
     {
-        public int chiId { get; set; }
-        public int parId { get; set; }
-        public string chiDescripcion { get; set; }
-        public string chiUrl { get; set; }
-        public bool state { get; set; }
-
-        [JsonIgnore]
-        public DateTime modifyDate { get; set; } = DateTime.Now;
-
-        public int modifyUser { get; set; }
+        public int ChId { get; set; }
+        public int ParId { get; set; } = 0;
+        public string? ChiDescripcion { get; set; }
+        public string? ChiUrl { get; set; }
+        public bool? State { get; set; }
+        public int ModifyUser { get; set; }
     }
 }

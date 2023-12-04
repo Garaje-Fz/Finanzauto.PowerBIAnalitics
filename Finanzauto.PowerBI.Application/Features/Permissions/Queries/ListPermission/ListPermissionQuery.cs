@@ -10,10 +10,10 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Queries.ListPermis
 {
     public class ListPermissionQuery : IRequest<ResponseListPermissionVm>
     {
-        public ListPermissionQuery(int? perId)
+        public ListPermissionQuery(int? usrId)
         {
-            PerId = perId;
+            this.usrId = usrId;
         }
-        public int? PerId { get; set; }
+        public int? usrId { get; set; }
     }
 }

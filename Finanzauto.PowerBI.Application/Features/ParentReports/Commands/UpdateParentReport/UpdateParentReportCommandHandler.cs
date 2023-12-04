@@ -32,7 +32,7 @@ namespace Finanzauto.PowerBI.Application.Features.ParentReports.Commands.UpdateP
         }
         public async Task<ResponseParentReportVm> Handle(UpdateParentReportCommand request, CancellationToken cancellationToken)
         {
-            var updateParentReport = await _unitOfWork.Repository<ParentReport>().GetFirstOrDefaultAsync(x => x.parId == request.parId && x.state == true);
+            var updateParentReport = await _unitOfWork.Repository<ParentReport>().GetFirstOrDefaultAsync(x => x.parId == request.parId);
 
             if (updateParentReport != null)
             {
@@ -40,7 +40,7 @@ namespace Finanzauto.PowerBI.Application.Features.ParentReports.Commands.UpdateP
                 updateParentReport.parIcon = request.parIcon;
                 updateParentReport.state = request.state;
                 updateParentReport.modifyDate = DateTime.Now;
-                updateParentReport.modifyUser = 1;
+                updateParentReport.modifyUser = request.modifyUser;
 
                 var parentReportEntityGetResponse = await _unitOfWork.Repository<ParentReport>().UpdateAsync(updateParentReport);
                 var parentReportEntityResponse = _mapper.Map<ParentReportVm>(parentReportEntityGetResponse);

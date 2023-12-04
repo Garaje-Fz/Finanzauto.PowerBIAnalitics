@@ -15,7 +15,10 @@ namespace Finanzauto.PowerBI.Application.Features.Logs.Commands.UpdateLog
         public int usrId { get; set; }
         public int chiIld { get; set; }
         public int logPrintTimes { get; set; }
-        public DateTime logLastConnection { get; set; }
+
+        [JsonIgnore]
+        public DateTime logLastConnection { get; set; } = DateTime.Now;
+
         public bool state { get; set; }
 
         [JsonIgnore] 

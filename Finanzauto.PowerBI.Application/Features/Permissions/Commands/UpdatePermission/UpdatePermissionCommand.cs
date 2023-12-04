@@ -11,14 +11,9 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.UpdatePer
 {
     public class UpdatePermissionCommand : IRequest<ResponsePermissionVm>
     {
-        public int perId { get; set; }
         public int usrId { get; set; }
-        public int chilId { get; set; }
-        public bool state { get; set; }
-
-        [JsonIgnore]
-        public DateTime modifyDate { get; set; } = DateTime.Now;
-
+        public int chId { get; set; }
+        public bool? state { get; set; }
         public int modifyUser { get; set; }
     }
 }

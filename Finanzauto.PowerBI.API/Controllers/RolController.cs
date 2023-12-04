@@ -8,6 +8,7 @@ using Finanzauto.PowerBI.Application.Models.ViewModel;
 using Finanzauto.PowerBI.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -15,6 +16,7 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
+    [EnableCors]
 #if !DEBUG
     [Authorize]
 #endif
@@ -27,21 +29,20 @@ namespace Finanzauto.PowerBI.API.Controllers
             _mediator = mediator;
         }
         [HttpGet("GetRol")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser(int? rolId)
+        public async Task<ActionResult<IEnumerable<User>>> GetRol(int? rolId)
         {
             var query = await _mediator.Send(new ListRolQuery(rolId));
             return Ok(query);
         }
         [HttpPost("AddRol")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ResponseRolVm>> CreateUser([FromBody] CreateRolCommand command)
+        public async Task<ActionResult<ResponseRolVm>> CreateRol([FromBody] CreateRolCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
 
         [HttpPut("UpRol")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ResponseRolVm>> UpdateUser([FromBody] UpdateRolCommand command)
+        public async Task<ActionResult<ResponseRolVm>> UpdateRol([FromBody] UpdateRolCommand command)
         {
             return Ok(await _mediator.Send(command));
         }

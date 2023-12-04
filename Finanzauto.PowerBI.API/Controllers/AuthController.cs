@@ -9,6 +9,7 @@ using Finanzauto.PowerBI.Auth.Services;
 using Finanzauto.PowerBI.Domain;
 using Finanzauto.PowerBI.Infraestructure.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 

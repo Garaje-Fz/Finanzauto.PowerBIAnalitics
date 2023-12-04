@@ -29,16 +29,16 @@ namespace Finanzauto.PowerBI.Application.Features.ChildReports.Commands.UpdateCh
 
         public async Task<ResponseChildReportVm> Handle(UpdateChildReportCommand request, CancellationToken cancellationToken)
           {
-             var updateChildReport = await _unitOfWork.Repository<ChildReport>().GetFirstOrDefaultAsync(x => x.chId == request.chiId && x.state == true);
+             var updateChildReport = await _unitOfWork.Repository<ChildReport>().GetFirstOrDefaultAsync(x => x.chId == request.ChId);
 
             if (updateChildReport != null)
             {
-                updateChildReport.chiDescription = request.chiDescripcion;
-                updateChildReport.chiUrl = request.chiUrl;
-                updateChildReport.parId = request.parId;
-                updateChildReport.state = request.state;
+                if (request.ChiDescripcion != null) updateChildReport.chiDescription = request.ChiDescripcion;
+                if (request.ChiUrl != null) updateChildReport.chiUrl = request.ChiUrl;
+                if (request.ParId != 0) updateChildReport.parId = request.ParId;
+                if (request.State != null) updateChildReport.state = request.State;
                 updateChildReport.modifyDate = DateTime.Now;
-                updateChildReport.modifyUser = 1;
+                updateChildReport.modifyUser = request.ModifyUser;
 
                 var childReportEntityGetResponse = await _unitOfWork.Repository<ChildReport>().UpdateAsync(updateChildReport);
                 var childReportEntityResponse = _mapper.Map<ChildReportVm>(childReportEntityGetResponse);
@@ -56,7 +56,7 @@ namespace Finanzauto.PowerBI.Application.Features.ChildReports.Commands.UpdateCh
             }
             else
             {
-                throw new BadRequestException($"El usuario con Id {request.chiId} no existe");
+                throw new BadRequestException($"El usuario con Id {request.ChId} no existe");
             }
         }
     }

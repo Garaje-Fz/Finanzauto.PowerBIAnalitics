@@ -12,13 +12,7 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.CreatePer
     public class CreatePermissionCommand : IRequest<ResponsePermissionVm>
     {
         public int usrId { get; set; }
-        public int chilId { get; set; }
-
-        [JsonIgnore]
-        public bool state { get; set; } = true;
-        [JsonIgnore]
-        public DateTime createDate { get; set; } = DateTime.Now;
-
+        public int chId { get; set; }
         public int createUser { get; set; }
     }
 }

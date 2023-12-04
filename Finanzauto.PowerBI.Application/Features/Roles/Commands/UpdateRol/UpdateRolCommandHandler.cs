@@ -32,10 +32,12 @@ namespace Finanzauto.PowerBI.Application.Features.Roles.Commands.UpdateRol
 
             if (updateRol != null)
             {
-                updateRol.rolDescription = request.rolDescription;
-                updateRol.state = request.state;
+                if (request.rolDescription != null)
+                    updateRol.rolDescription = request.rolDescription;
+                if (request.state != null)
+                    updateRol.state = request.state;
                 updateRol.modifyDate = DateTime.Now;
-                updateRol.modifyUser = 1;
+                updateRol.modifyUser = request.modifyUser;
 
                 var rolEntityGetResponse = await _unitOfWork.Repository<Rol>().UpdateAsync(updateRol);
                 var rolEntityResponse = _mapper.Map<RolVm>(rolEntityGetResponse);

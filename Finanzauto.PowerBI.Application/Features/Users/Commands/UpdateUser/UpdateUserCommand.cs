@@ -12,12 +12,12 @@ namespace Finanzauto.PowerBI.Application.Features.Users.Commands.UpdateUser
     public class UpdateUserCommand : IRequest<ResponseUserVm>
     {
         public int usrId { get; set; }
-        public string usrName { get; set; }
-        public string usrLastName { get; set; }
-        public string usrEmail { get; set; }
-        public string usrDomainName { get; set; }
-        public int rolId { get; set; }
-        public bool state { get; set; }
+        public string? usrName { get; set; }
+        public string? usrLastName { get; set; }
+        public string? usrEmail { get; set; }
+        public string? usrDomainName { get; set; }
+        public int rolId { get; set; } = 0;
+        public bool? state { get; set; }
 
         [JsonIgnore]
         public DateTime modifyDate { get; set; } = DateTime.Now;

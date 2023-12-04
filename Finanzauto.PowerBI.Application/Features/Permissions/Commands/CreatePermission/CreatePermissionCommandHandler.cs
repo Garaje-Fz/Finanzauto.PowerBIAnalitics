@@ -32,14 +32,27 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.CreatePer
         {
             if (request != null)
             {
-                var userEntity = _mapper.Map<Permission>(request);
-                var userEntityAdd = await _unitOfWork.Repository<Permission>().AddAsync(userEntity);
-                var userEntityResponse = _mapper.Map<PermissionVm>(userEntityAdd);
+                var createPermisions = new Permission()
+                {
+                    usrId = request.usrId,
+                    chilId = request.chId,
+                    state = true,
+                    createDate = DateTime.Now,
+                    createUser = request.createUser,
+                    modifyUser = request.createUser
+                };
+                var userEntityAdd = await _unitOfWork.Repository<Permission>().AddAsync(createPermisions);
+                var permisionsChild = await _unitOfWork.Repository<ChildReport>().GetFirstOrDefaultAsync(x => x.chId == request.chId);
+                var vmChildPermisions = new PermissionVm()
+                {
+                    usrId = request.usrId,
+                    chId = request.chId,
+                    parId = permisionsChild.parId
+                };
 
                 ResponsePermissionVm response = new ResponsePermissionVm()
                 {
-                    result = userEntityResponse
-
+                    result = vmChildPermisions
                 };
 
                 _logger.LogInformation($"El permiso fue creado con el id {userEntityAdd.usrId}");

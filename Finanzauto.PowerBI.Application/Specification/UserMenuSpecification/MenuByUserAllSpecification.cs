@@ -9,16 +9,16 @@ namespace Finanzauto.PowerBI.Application.Specification.UserMenuSpecification
 {
     public class MenuByUserAllSpecification : Specification<User>
     {
-        public MenuByUserAllSpecification(int? UsrId) : base
-            (
-            cr => cr.usrId == UsrId
-            )
-        {
-            AddInclude(i => i.Permissions);
-            AddInclude($"{nameof(User.Permissions)}");
-            AddInclude($"{nameof(User.Permissions)}.{nameof(Permission.ChildReport)}");
-            AddInclude($"{nameof(User.Permissions)}.{nameof(Permission.ChildReport)}.{nameof(ChildReport.ParentReport)}");
-        }
+        //public MenuByUserAllSpecification(int? UsrId) : base
+        //    (
+        //    cr => cr.usrId == UsrId
+        //    )
+        //{
+        //    AddInclude(i => i.Permissions);
+        //    AddInclude($"{nameof(User.Permissions)}");
+        //    AddInclude($"{nameof(User.Permissions)}.{nameof(Permission.ChildReport)}");
+        //    AddInclude($"{nameof(User.Permissions)}.{nameof(Permission.ChildReport)}.{nameof(ChildReport.ParentReport)}");
+        //}
 
 
     }

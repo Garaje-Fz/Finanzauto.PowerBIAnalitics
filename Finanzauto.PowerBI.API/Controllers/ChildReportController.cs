@@ -8,6 +8,7 @@ using Finanzauto.PowerBI.Application.Models.ViewModel;
 using Finanzauto.PowerBI.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -15,10 +16,10 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
+    [EnableCors]
 #if !DEBUG
         [Authorize]
 #endif
-
     public class ChildReportController : ControllerBase
     {
         private readonly IMediator _mediator;

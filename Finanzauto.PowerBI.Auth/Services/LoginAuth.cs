@@ -92,7 +92,7 @@ namespace Finanzauto.PowerBI.Auth.Services
                     tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(claimsIdentity),
-                        Expires = DateTime.UtcNow.AddMinutes(30),
+                        Expires = DateTime.UtcNow.AddHours(2),
                         SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)
                     };
                 }
@@ -198,6 +198,7 @@ namespace Finanzauto.PowerBI.Auth.Services
             try
             {
                 var user = _context.Users.Where(x => x.usrDomainName == userDomain);
+                if (user.FirstOrDefault().state == false) throw new Exception("Usuario Deshabilitado");
                 var role = _context.Roles.Where(x => x.rolId == user.FirstOrDefault().rolId);
                 List<Authorize> result = new List<Authorize>();
                 result.Add(new Authorize()
@@ -211,7 +212,7 @@ namespace Finanzauto.PowerBI.Auth.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Error obtencion de roles del usuario.", ex);
+                throw new Exception(ex.Message);
             }
         }
         public async Task<Tuple<Authorize, Tokens>> Login(string usr, string pass)

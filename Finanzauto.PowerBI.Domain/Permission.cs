@@ -13,11 +13,11 @@ namespace Finanzauto.PowerBI.Domain
 
         public int usrId { get; set; }
         [ForeignKey("usrId")]
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
         public int chilId { get; set; }
         [ForeignKey("chilId")]
-        public virtual ChildReport ChildReport { get; set; }
+        public ChildReport ChildReport { get; set; }
 
     }
 }

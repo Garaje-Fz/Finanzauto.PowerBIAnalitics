@@ -16,7 +16,6 @@ namespace Finanzauto.PowerBI.Application.Models.ViewModel
         public string usrEmail { get; set; }
         public string usrDomainName { get; set; }
         public int rolId { get; set; }
-        public Rol Rol { get; set; }
         public bool state { get; set; }
         public DateTime createDate { get; set; }
         public DateTime? modifyDate { get; set; }

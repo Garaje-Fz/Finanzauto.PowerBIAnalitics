@@ -352,6 +352,12 @@ namespace Finanzauto.PowerBI.Infraestructure.Persistence
                 tokens.ToTable("Tokens");
                 tokens.HasKey(x => x.tknId);
             });
+            modelBuilder.Entity<User>(user =>
+            {
+                user.ToTable("Users");
+                user.HasKey(x => x.usrId);
+                user.HasData(UserInit);
+            });
         }
         public DbSet<ChildReport> ChildReports { get; set; }
         public DbSet<Log> Logs { get; set; }

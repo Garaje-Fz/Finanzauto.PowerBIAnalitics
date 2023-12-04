@@ -12,8 +12,8 @@ namespace Finanzauto.PowerBI.Application.Features.Roles.Commands.UpdateRol
     public class UpdateRolCommand : IRequest<ResponseRolVm>
     {
         public int rolId { get; set; }
-        public string rolDescription { get; set; }
-        public bool state { get; set; }
+        public string? rolDescription { get; set; }
+        public bool? state { get; set; }
 
         [JsonIgnore]
         public DateTime modifyDate { get; set; } = DateTime.Now;

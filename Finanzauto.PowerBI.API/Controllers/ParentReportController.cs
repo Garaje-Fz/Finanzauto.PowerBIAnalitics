@@ -8,6 +8,7 @@ using Finanzauto.PowerBI.Application.Models.ViewModel;
 using Finanzauto.PowerBI.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -32,6 +33,7 @@ namespace Finanzauto.PowerBI.API.Controllers
             var query = await _mediator.Send(new ListParentReportQuery(parid));
             return Ok(query);
         }
+
         [HttpPost("AddParentReport")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseParentReportVm>> CreatePermission([FromBody] CreateParentReportCommand command)

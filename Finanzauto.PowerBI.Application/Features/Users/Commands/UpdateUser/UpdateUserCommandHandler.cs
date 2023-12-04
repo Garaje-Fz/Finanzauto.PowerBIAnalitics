@@ -28,16 +28,22 @@ namespace Finanzauto.PowerBI.Application.Features.Users.Commands.UpdateUser
         }
         public async Task<ResponseUserVm> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var updateUser = await _unitOfWork.Repository<User>().GetFirstOrDefaultAsync(x => x.usrId == request.usrId && x.state == true);
+            var updateUser = await _unitOfWork.Repository<User>().GetFirstOrDefaultAsync(x => x.usrId == request.usrId);
 
             if (updateUser != null)
             {
-                updateUser.usrName = request.usrName;
-                updateUser.usrLastName = request.usrLastName;
-                updateUser.usrDomainName = request.usrDomainName;
-                updateUser.rolId = request.rolId;
-                updateUser.usrEmail = request.usrEmail;
-                updateUser.state = request.state;
+                if (request.usrName != null)
+                    updateUser.usrName = request.usrName;
+                if (request.usrLastName != null)
+                    updateUser.usrLastName = request.usrLastName;
+                if (request.usrEmail != null)
+                    updateUser.usrEmail = request.usrEmail;
+                if (request.usrDomainName != null)
+                    updateUser.usrDomainName = request.usrDomainName;
+                if (request.rolId != 0)
+                    updateUser.rolId = request.rolId;
+                if (request.state != null)
+                    updateUser.state = request.state;
                 updateUser.modifyDate = DateTime.Now;
                 updateUser.modifyUser = request.usrId;
 

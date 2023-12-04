@@ -33,7 +33,7 @@ namespace Finanzauto.PowerBI.Auth
                 RequireExpirationTime = false,
                 ClockSkew = TimeSpan.Zero
             };
-
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("PolicyCors", builder =>

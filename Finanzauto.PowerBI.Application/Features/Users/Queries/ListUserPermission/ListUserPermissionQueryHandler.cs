@@ -34,11 +34,11 @@ namespace Finanzauto.PowerBI.Application.Features.Users.Queries.ListUserPermissi
 
         public async Task<List<ResponseMenuVm>> Handle(ListUserPermissionQuery request, CancellationToken cancellationToken)
         {
-            var spec = new MenuByUserAllSpecification(request.UsrId);
-            var menu = await _unitOfWork.Repository<User>().GetAllWithSpec(spec);
-            var menuMapped = _mapper.Map<List<ResponseMenuVm>>(menu);
+            //var spec = new MenuByUserAllSpecification(request.UsrId);
+            //var menu = await _unitOfWork.Repository<User>().GetAllWithSpec(spec);
+            //var menuMapped = _mapper.Map<List<ResponseMenuVm>>(menu);
 
-            return menuMapped;
+            return null;
         }
 
     };

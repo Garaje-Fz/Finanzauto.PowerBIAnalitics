@@ -10,10 +10,9 @@ namespace Finanzauto.PowerBI.Application.Models.ViewModel
 {
     public class PermissionVm
     {
-        public int perId { get; set; }
         public int usrId { get; set; }
-        public int chilId { get; set; }
-        public DateTime modifyDate { get; set; }
-        public int modifyUser { get; set; }
+        public int chId { get; set; }
+        public bool? state { get; set; }
+        public int parId { get; set; }
     }
 }

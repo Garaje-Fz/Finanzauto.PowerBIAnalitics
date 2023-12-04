@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Finanzauto.PowerBI.Infraestructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +22,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     parIcon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     parDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -38,9 +40,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     rolDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -58,9 +60,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     chiUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     parId = table.Column<int>(type: "int", nullable: false),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -86,9 +88,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     usrDomainName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     rolId = table.Column<int>(type: "int", nullable: false),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -113,9 +115,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     lgnLastConnection = table.Column<DateTime>(type: "datetime2", nullable: false),
                     usrId = table.Column<int>(type: "int", nullable: false),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -140,9 +142,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     usrId = table.Column<int>(type: "int", nullable: false),
                     chId = table.Column<int>(type: "int", nullable: false),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -171,9 +173,9 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     usrId = table.Column<int>(type: "int", nullable: false),
                     chilId = table.Column<int>(type: "int", nullable: false),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -205,10 +207,12 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                     tknIsUsed = table.Column<bool>(type: "bit", nullable: false),
                     JwtId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExpirateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CodigoMensaje = table.Column<int>(type: "int", nullable: false),
+                    DescMensaje = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     state = table.Column<bool>(type: "bit", nullable: false),
-                    createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    createDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    createUser = table.Column<int>(type: "int", nullable: false),
+                    createUser = table.Column<int>(type: "int", nullable: true),
                     modifyUser = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -220,6 +224,67 @@ namespace Finanzauto.PowerBI.Infraestructure.Migrations
                         principalTable: "Users",
                         principalColumn: "usrId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "ParentReports",
+                columns: new[] { "parId", "createDate", "createUser", "modifyDate", "modifyUser", "parDescription", "parIcon", "state" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6220), 4, null, null, "Reportes Estratégicos", "strategic", true },
+                    { 2, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6223), 2140, null, null, "Reportes Tácticos", "tactical", true },
+                    { 3, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6224), 2140, null, null, "Reportes Operacionales", "operative", true },
+                    { 4, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6225), 2140, null, null, "Reportes Administrador", "administrador", true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "rolId", "createDate", "createUser", "modifyDate", "modifyUser", "rolDescription", "state" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6126), 1, null, null, "Administrador", true },
+                    { 2, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6152), 1, null, null, "Operativo", true },
+                    { 3, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6153), 1, null, null, "Estrategico", true },
+                    { 4, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6154), 1, null, null, "Supervisor", true },
+                    { 5, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6156), 1, null, null, "Default", true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ChildReports",
+                columns: new[] { "chId", "chiDescription", "chiUrl", "createDate", "createUser", "modifyDate", "modifyUser", "parId", "state" },
+                values: new object[,]
+                {
+                    { 1, "Reporte Estratégico # 1", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ9", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6233), 2140, null, null, 1, true },
+                    { 2, "Reporte Estratégico # 2 ", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ10", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6235), 2140, null, null, 1, true },
+                    { 3, "Reporte Estratégico # 3", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ11", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6236), 2140, null, null, 1, true },
+                    { 4, "Reporte Táctico # 1", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ12", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6238), 2140, null, null, 2, true },
+                    { 5, "Reporte Táctico # 2", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ13", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6239), 2140, null, null, 2, true },
+                    { 6, "Reporte Táctico # 3", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ14", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6242), 2140, null, null, 2, true },
+                    { 7, "Reporte Operativo # 1", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ15\r\n", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6243), 2140, null, null, 3, true },
+                    { 8, "Reporte Operativo # 2", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ16\r\n", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6244), 2140, null, null, 3, true },
+                    { 9, "Reporte Táctico # 3", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ17\r\n", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6245), 2140, null, null, 3, true },
+                    { 10, "Gestión de Permisos", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ18\r\n", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6247), 2140, null, null, 4, true },
+                    { 11, "Gestión de Reportes", "https://app.powerbi.com/view?r=eyJrIjoiZjIwZmUxYWYtOTc0Zi00OTExLWEyNzAtZTIwYmQyNDAzNjg4IiwidCI6IjhlZGRjOTE5LTMxNzEtNDYwZC04NGE0LWIzMGFlNjVlMzdjMyJ19\r\n", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6248), 2140, null, null, 4, true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "usrId", "createDate", "createUser", "modifyDate", "modifyUser", "rolId", "state", "usrDomainName", "usrEmail", "usrLastName", "usrName" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6211), 1, null, null, 1, true, "efrain.guzman", "efrain.guzman@finanzauto.com.co", "Guzman", "Efrain" },
+                    { 2, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6214), 1, null, null, 1, true, "hector.cruz", "hector.cruz@finanzauto.com.co", "Cruz", "Hector" },
+                    { 3, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6215), 1, null, null, 1, true, "cristian.vargas", "cristian.vargas@finanzauto.com.co", "Vargas", "Cristian" },
+                    { 4, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6217), 1, null, null, 1, true, "julian.bojaca", "julian.bojaca@finanzauto.com.co", "Bojaca", "Julian" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Logins",
+                columns: new[] { "lgnId", "createDate", "createUser", "lgnConnectionTimes", "lgnIp", "lgnLastConnection", "modifyDate", "modifyUser", "state", "usrId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6252), 4, 10, "123.12.36.52", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6251), null, null, true, 1 },
+                    { 2, new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6254), 4, 10, "123.12.36.2", new DateTime(2023, 4, 11, 9, 10, 18, 922, DateTimeKind.Local).AddTicks(6254), null, null, true, 1 }
                 });
 
             migrationBuilder.CreateIndex(

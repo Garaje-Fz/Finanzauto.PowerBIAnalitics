@@ -31,35 +31,41 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Commands.UpdatePer
 
         public async Task<ResponsePermissionVm> Handle(UpdatePermissionCommand request, CancellationToken cancellationToken)
         {
-            var updatePermission = await _unitOfWork.Repository<Permission>().GetFirstOrDefaultAsync(x => x.perId == request.perId && x.state == true);
-
-            if (updatePermission == null)
+            var command = new Permission();
+            var updatePermission = await _unitOfWork.Repository<Permission>().GetFirstOrDefaultAsync(x => x.usrId == request.usrId && x.chilId == request.chId);
+            if (updatePermission != null)
             {
                 updatePermission.usrId = request.usrId;
-                updatePermission.chilId = request.chilId;
+                updatePermission.chilId = request.chId;
                 updatePermission.state = request.state;
                 updatePermission.modifyDate = DateTime.Now;
-                updatePermission.modifyUser = request.usrId;
-               
-                var permissionEntityGetResponse = await _unitOfWork.Repository<Permission>().UpdateAsync(updatePermission);
-                var permissionEntityResponse = _mapper.Map<PermissionVm>(permissionEntityGetResponse);
-
-                ResponsePermissionVm response = new ResponsePermissionVm()
-                {
-                    result = permissionEntityResponse
-
-                };
-
-                _logger.LogInformation($"El permiso fue creado con el id {updatePermission.usrId}");
-
-
-                return response;
-
+                updatePermission.modifyUser = request.modifyUser;
+                command = await _unitOfWork.Repository<Permission>().UpdateAsync(updatePermission);
             }
             else
             {
-                throw new BadRequestException($"El usuario con Id {request.usrId} ya existe");
+                var createPermissions = new Permission()
+                {
+                    usrId = request.usrId,
+                    chilId = request.chId,
+                    state = request.state,
+                    createDate = DateTime.Now,
+                    createUser = request.modifyUser
+                };
+                command = await _unitOfWork.Repository<Permission>().AddAsync(createPermissions);
             }
+            var parentReport = await _unitOfWork.Repository<ChildReport>().GetFirstOrDefaultAsync(x => x.chId == request.chId);
+            var response = new PermissionVm()
+            {
+                usrId = command.usrId,
+                chId = command.chilId,
+                parId = parentReport.parId,
+                state = command.state
+            };
+            return new ResponsePermissionVm()
+            {
+                result = response
+            };
         }
     }
 }

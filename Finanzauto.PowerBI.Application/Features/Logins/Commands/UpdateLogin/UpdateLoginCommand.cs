@@ -13,8 +13,11 @@ namespace Finanzauto.PowerBI.Application.Features.Logins.Commands.UpdateLogin
     {
         public int lgnId { get; set; }
         public string lgnIp { get; set; }
-        public int lgnConnectionTimes { get; set; }
-        public DateTime lgnLastConnection { get; set; }
+        public int lgnConnectionTimes { get; set; } 
+
+        [JsonIgnore]
+        public DateTime lgnLastConnection { get; set; } = DateTime.Now;
+
         public int usrId { get; set; }
         public bool state { get; set; }
 

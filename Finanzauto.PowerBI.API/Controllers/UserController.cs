@@ -1,11 +1,13 @@
 ﻿using Finanzauto.PowerBI.Application.Features.Users.Commands.CreateUser;
 using Finanzauto.PowerBI.Application.Features.Users.Commands.UpdateUser;
+using Finanzauto.PowerBI.Application.Features.Users.Queries.ListAllChildByUser;
 using Finanzauto.PowerBI.Application.Features.Users.Queries.ListUser;
 using Finanzauto.PowerBI.Application.Features.Users.Queries.ListUserPermission;
 using Finanzauto.PowerBI.Application.Models.ViewModel;
 using Finanzauto.PowerBI.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -13,6 +15,7 @@ namespace Finanzauto.PowerBI.API.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
+    [EnableCors]
 #if !DEBUG
         [Authorize]
 #endif  
@@ -43,6 +46,14 @@ namespace Finanzauto.PowerBI.API.Controllers
 
             return Ok(query);
         }
+
+        [HttpGet("GetPermisionListChild")]
+        public async Task<ActionResult<IEnumerable<GetUserMenuVm>>> GetListMenuChild(int? usrId)
+        {
+            var query = await _mediator.Send(new ListAllChildByUserQuery(usrId));
+            return Ok(query);
+        }
+
         [HttpPost("AddUser")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseUserVm>> CreateUser([FromBody] CreateUserCommand command)
@@ -51,7 +62,6 @@ namespace Finanzauto.PowerBI.API.Controllers
         }
 
         [HttpPut("UpUser")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseUserVm>> UpdateUser([FromBody] UpdateUserCommand command)
         {
             return Ok(await _mediator.Send(command));

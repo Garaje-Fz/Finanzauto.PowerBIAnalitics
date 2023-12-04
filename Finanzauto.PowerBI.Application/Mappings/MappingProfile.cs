@@ -37,7 +37,7 @@ namespace Finanzauto.PowerBI.Application.Mappings
             CreateMap<User, ListUserVm>();
             CreateMap<User, MenuByUserAllSpecification>();
             //Mapeo menu con especificaciones
-            CreateMap<User, ResponseMenuVm>().ForMember(dest=>dest.PermissionMenu,opt=>opt.MapFrom(src=>src.Permissions));
+            //CreateMap<User, ResponseMenuVm>().ForMember(dest=>dest.PermissionMenu,opt=>opt.MapFrom(src=>src.Permissions));
             CreateMap<Permission, PermissionMenuVm>().ForMember(dest => dest.Menu, opt => opt.MapFrom(src => src.ChildReport));
             CreateMap<ChildReport, MenuVm>().ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.ParentReport));
             

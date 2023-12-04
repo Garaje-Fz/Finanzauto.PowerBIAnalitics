@@ -33,11 +33,23 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Queries.ListPermis
 
         public async Task<ResponseListPermissionVm> Handle(ListPermissionQuery request, CancellationToken cancellationToken)
         {
-            if (request.PerId != null)
+            if (request.usrId!= null)
             {
-                var permission = await _unitOfWork.Repository<Permission>().GetAsync(x => x.perId == request.PerId);
-                var permissionVm = _mapper.Map<List<ListPermissionVm>>(permission);
-
+                var permission = await _unitOfWork.Repository<Permission>().GetAsync(x => x.usrId == request.usrId);
+                var permissionVm = new List<ListPermissionVm>();
+                foreach (var item in permission)
+                {
+                    permissionVm.Add(new ListPermissionVm()
+                    {
+                        usrId = item.usrId,
+                        chId = item.chilId,
+                        state = item.state,
+                        createDate = item.createDate,
+                        createUser = item.createUser,
+                        modifyDate = item.modifyDate,
+                        modifyUser = item.modifyUser,
+                    });
+                }
                 ResponseListPermissionVm response = new ResponseListPermissionVm()
                 {
                     result = permissionVm
@@ -48,7 +60,21 @@ namespace Finanzauto.PowerBI.Application.Features.Permissions.Queries.ListPermis
             else
             {
                 var permission = await _unitOfWork.Repository<Permission>().GetAllAsync();
-                var permissionVm = _mapper.Map<List<ListPermissionVm>>(permission);
+                //var permissionVm = _mapper.Map<List<ListPermissionVm>>(permission);
+                var permissionVm = new List<ListPermissionVm>();
+                foreach (var item in permission)
+                {
+                    permissionVm.Add(new ListPermissionVm()
+                    {
+                        usrId = item.usrId,
+                        chId = item.chilId,
+                        state = item.state,
+                        createDate = item.createDate,
+                        createUser = item.createUser,
+                        modifyDate = item.modifyDate,
+                        modifyUser = item.modifyUser,
+                    });
+                }
 
                 ResponseListPermissionVm response = new ResponseListPermissionVm()
                 {
